@@ -5,12 +5,15 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq gcc gperf bison flex texinfo help2man make libncurses5-dev python-dev build-essential
 
-
 before_script:
   - git clone https://github.com/crosstool-ng/crosstool-ng
   - pushd crosstool-ng && ./bootstrap && ./configure --enable-local && make && popd
 
 script:
-  - mkdir -p ct-build
+  - mkdir -p ct-build && mkdir -p ${HOME}/src
   - cp ics_linux.defconfig ct-build/.config 
   - pushd ct-build && ../crosstool-ng/ct-ng build && popd
+
+cache:
+  directories:
+    - ${HOME}/src
