@@ -1,0 +1,37 @@
+sudo: true
+language: generic
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - build-essential
+      - gperf
+      - gawk
+      - gcc-7
+      - libncurses5-dev
+      - automake
+      - libtool
+      - bison
+      - flex
+      - texinfo
+      - curl
+      - cvs
+      - subversion
+      - gcj-jdk
+      - libexpat1-dev
+      - python-dev
+      - git
+      - help2man
+      - make
+
+
+before_script:
+  - git clone https://github.com/crosstool-ng/crosstool-ng
+  - pushd crosstool-ng && ./bootstrap && ./configure --enable-local && make && popd
+
+script:
+  - mkdir -p ct-build
+  - cp ics_linux.defconfig ct-build/.config 
+  - pushd ct-build && ../crosstool-ng/ct-ng build && popd
