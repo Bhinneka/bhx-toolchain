@@ -1,28 +1,9 @@
 language: generic
 dist: xenial
 
-addons:
-  apt:
-    packages:
-      - build-essential
-      - gperf
-      - gawk
-      - gcc-7
-      - libncurses5-dev
-      - automake
-      - libtool
-      - bison
-      - flex
-      - texinfo
-      - curl
-      - cvs
-      - subversion
-      - gcj-jdk
-      - libexpat1-dev
-      - python-dev
-      - git
-      - help2man
-      - make
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq gcc gperf bison flex texinfo help2man make libncurses5-dev python-dev build-essential
 
 
 before_script:
